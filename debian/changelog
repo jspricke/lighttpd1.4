@@ -1,3 +1,11 @@
+lighttpd (1.4.73-2~1.gbp75b7edca) UNRELEASED; urgency=medium
+
+  ** SNAPSHOT build @75b7edca **
+
+  * Add ECH patch
+
+ -- Jochen Sprickerhof <jspricke@debian.org>  Mon, 22 Jan 2024 14:39:21 +0100
+
 lighttpd (1.4.73-1) unstable; urgency=medium
   * New upstream version 1.4.73
 
