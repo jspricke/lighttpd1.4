@@ -92,7 +92,7 @@
 #endif
 
 #ifndef OPENSSL_NO_ECH
-/*#define LIGHTTPD_OPENSSL_ECH_DEBUG*/ /*(ECH developer debug trace)*/
+#define LIGHTTPD_OPENSSL_ECH_DEBUG /*(ECH developer debug trace)*/
 #if defined(BORINGSSL_API_VERSION)
 #include <openssl/hpke.h>
 #ifndef TLSEXT_TYPE_ech
