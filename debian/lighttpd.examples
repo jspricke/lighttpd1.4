@@ -1,1 +1,1 @@
-doc/systemd/lighttpd.socket
+doc/systemd/lighttpd*.socket
