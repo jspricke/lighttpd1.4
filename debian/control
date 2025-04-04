@@ -6,7 +6,8 @@ Uploaders: Glenn Strauss <gstrauss@gluelogic.com>, Stefan Bühler <stbuehler@web
 Homepage: https://www.lighttpd.net/
 Build-Depends:
  dpkg-dev (>= 1.16.1~),
- debhelper-compat (= 12),
+ debhelper-compat (= 13),
+ dh-sequence-zz-debputy-rrr (>= 0.1.23~),
  libdeflate-dev,
  media-types <!nocheck> | mime-support <!nocheck>,
  libgnutls28-dev (>= 3.6.5),
@@ -17,13 +18,12 @@ Build-Depends:
  zlib1g-dev,
  libbrotli-dev,
  libpcre2-dev,
- default-libmysqlclient-dev | libmysqlclient-dev,
+ default-libmysqlclient-dev,
  libdbi-dev,
  libldap2-dev,
  liblua5.4-dev,
  libmaxminddb-dev,
- pkg-config,
- uuid-dev,
+ pkgconf,
  libsqlite3-dev,
  libxml2-dev,
  libkrb5-dev,
@@ -37,8 +37,8 @@ Build-Depends:
  perl:native,
 Vcs-Git: https://salsa.debian.org/debian/lighttpd.git
 Vcs-Browser: https://salsa.debian.org/debian/lighttpd
-Standards-Version: 4.6.2
-Rules-Requires-Root: binary-targets
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
 
 Package: lighttpd
 Architecture: any
@@ -50,21 +50,20 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  media-types | mime-support,
- systemd-sysv | lsb-base,
+ systemd-sysv,
 Pre-Depends:
  ${misc:Pre-Depends},
 Conflicts:
  lighttpd-mod-geoip,
  lighttpd-mod-trigger-b4-dl,
 Recommends:
- spawn-fcgi,
- perl:any,
  lighttpd-mod-deflate,
  lighttpd-mod-openssl,
 Suggests:
  openssl,
  php-cgi,
  php-fpm (>= 2:7.4),
+ spawn-fcgi,
  apache2-utils,
  lighttpd-doc,
  lighttpd-mod-webdav,

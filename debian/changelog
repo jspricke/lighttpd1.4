@@ -1,22 +1,92 @@
-lighttpd (1.4.73-2~1.gbp75b7edca) UNRELEASED; urgency=medium
-
-  ** SNAPSHOT build @75b7edca **
+lighttpd (1.4.79-0~1.ech) UNRELEASED; urgency=medium
 
   * Add ECH patch
 
  -- Jochen Sprickerhof <jspricke@debian.org>  Mon, 22 Jan 2024 14:39:21 +0100
 
+lighttpd (1.4.77-1) unstable; urgency=medium
+
+  [ Glenn Strauss ]
+  * Remove include-conf-enabled.pl
+    (deprecated since 2019 in debian/1.4.52-4)
+  * Test config in systemd ExecReload before signal SIGUSR1 (closes: #1084233)
+    (lighttpd 1.4.77)
+  * Remove perl from debian/control Recommends
+  * Move spawn-fcgi from debian/control Recommends to Suggests
+  * FTBFS with zlib-ng (closes: #1088683)
+  * New upstream version 1.4.77
+  * Drop patches applied upstream
+  * Add post-release patches
+  * Update debhelper compatibility level to 13.
+  * Move lighty-enable-mod.1 -> lighty-enable-mod.8
+  * Add debian/lighty-enable-mod to debian/copyright
+  * Remove obsolete alt packages from debian/control
+  * Add Documentation key to systemd unit lighttpd.lighttpd-maint.service
+
+  [ Niels Thykier ]
+  * add debian/rules override_dh_perl
+    perl dependency for `lighttpd` is handled manually (as Recommends)
+  * Migrate to `debputy` to remove the need for `fakeroot`
+
+ -- Glenn Strauss <gstrauss@gluelogic.com>  Wed, 22 Jan 2025 04:26:52 -0500
+
+lighttpd (1.4.76-1) unstable; urgency=medium
+
+  * New upstream version 1.4.76
+  * Detect VU#421644 HTTP/2 CONTINUATION Flood
+  * Avoid CVE-2024-3094 xz supply chain attack
+  * Patch to fix graceful shutdown timeout
+  * Fix FTBFS Linux on SPARC
+  * Declare compliance with policy 4.7.0 - no changes needed.
+
+ -- Glenn Strauss <gstrauss@gluelogic.com>  Wed, 29 May 2024 14:09:13 +0200
+
+lighttpd (1.4.75-1) unstable; urgency=medium
+
+  * New upstream version 1.4.75
+
+ -- Glenn Strauss <gstrauss@gluelogic.com>  Wed, 13 Mar 2024 11:04:26 -0400
+
+lighttpd (1.4.74-3) unstable; urgency=medium
+
+  * Patch mod_openssl cert expiration warning on armv7hf (closes: #1034586)
+  * Patch mod_dirlisting regression adding '/' to files (closes: #1065247)
+
+ -- Glenn Strauss <gstrauss@gluelogic.com>  Sat, 09 Mar 2024 12:53:44 -0500
+
+lighttpd (1.4.74-2) unstable; urgency=medium
+
+  [ Helmut Grohne ]
+  * defer installation of systemd-related files to the relevant debhelpers
+
+ -- Glenn Strauss <gstrauss@gluelogic.com>  Tue, 27 Feb 2024 04:07:02 -0500
+
+lighttpd (1.4.74-1) unstable; urgency=medium
+
+  * New upstream version 1.4.74 (closes: #1057385)
+  * Remove uuid-dev dependency from debian/control
+  * Graceful shutdown (if quick) debian/lighttpd.init
+  * Graceful reload in debian/lighttpd.init
+  * Add src/compat/sys/queue.h to debian/copyright
+  * Attempt to fix test-crossbuild-arm64 CI pipeline
+  * Install lighttpd-maint.service,.timer
+
+ -- Glenn Strauss <gstrauss@gluelogic.com>  Sat, 24 Feb 2024 06:08:14 -0500
+
 lighttpd (1.4.73-1) unstable; urgency=medium
+
   * New upstream version 1.4.73
 
- -- Glenn Strauss <gstrauss@gluelogic.com>  Sat, 30 Oct 2023 02:00:00 -0400
+ -- Glenn Strauss <gstrauss@gluelogic.com>  Mon, 30 Oct 2023 02:00:00 -0400
 
 lighttpd (1.4.72-1) unstable; urgency=medium
+
   * New upstream version 1.4.72 (closes: #1037337, #1040525)
 
  -- Glenn Strauss <gstrauss@gluelogic.com>  Sat, 07 Oct 2023 03:56:59 -0400
 
 lighttpd (1.4.71-2) unstable; urgency=medium
+
   [ Glenn Strauss ]
   * Build under UTF-8
   * Address lintian pedantry
@@ -29,11 +99,13 @@ lighttpd (1.4.71-2) unstable; urgency=medium
  -- Glenn Strauss <gstrauss@gluelogic.com>  Sun, 10 Sep 2023 05:55:55 -0500
 
 lighttpd (1.4.71-1+exp1) experimental; urgency=medium
+
   * New upstream version 1.4.71
 
  -- Glenn Strauss <gstrauss@gluelogic.com>  Sat, 03 Jun 2023 23:46:22 -0500
 
 lighttpd (1.4.70-1+exp1) experimental; urgency=medium
+
   * New upstream version 1.4.70
   * Install new module mod_h2 (separated out from lighttpd executable)
   * Update debian/copyright for lighttpd 1.4.70

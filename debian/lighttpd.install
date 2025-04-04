@@ -19,9 +19,6 @@ debian/tmp/usr/lib/lighttpd/mod_wstunnel.so
 debian/lighttpd.conf                        /etc/lighttpd
 debian/conf-available/*                     /etc/lighttpd/conf-available
 doc/scripts/create-mime.conf.pl             /usr/share/lighttpd/
-debian/include-conf-enabled.pl              /usr/share/lighttpd/
 debian/use-ipv6.pl                          /usr/share/lighttpd/
 debian/lighty-enable-mod                    /usr/sbin/
 debian/index.html                           /usr/share/lighttpd/
-debian/lighttpd.tmpfile.conf                /usr/lib/tmpfiles.d/
-doc/systemd/lighttpd.service                /lib/systemd/system/

@@ -1,0 +1,16 @@
+manifest-version: '0.1'
+packages:
+  lighttpd:
+    transformations:
+      - create-directories:
+          path: var/log/lighttpd
+          owner: www-data
+          group: www-data
+          mode: "0750"
+      - create-directories:
+          paths:
+            - var/cache/lighttpd
+            - var/cache/lighttpd/compress
+            - var/cache/lighttpd/uploads
+          owner: www-data
+          group: www-data

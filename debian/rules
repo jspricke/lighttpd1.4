@@ -50,9 +50,9 @@ override_dh_auto_configure:
 		--with-xxhash \
 		--with-zstd \
 		$(if $(filter pkg.lighttpd.libunwind,$(DEB_BUILD_PROFILES)),--with-libunwind) \
-		CFLAGS_FOR_BUILD="$(shell dpkg-buildflags --get CFLAGS)" \
-		LDFLAGS_FOR_BUILD="$(shell dpkg-buildflags --get LDFLAGS)" \
-		CPPFLAGS_FOR_BUILD="$(shell dpkg-buildflags --get CPPFLAGS)" \
+		CFLAGS_FOR_BUILD="$$(dpkg-architecture -a$(DEB_BUILD_ARCH) -f -c dpkg-buildflags --get CFLAGS)" \
+		LDFLAGS_FOR_BUILD="$$(dpkg-architecture -a$(DEB_BUILD_ARCH) -f -c dpkg-buildflags --get LDFLAGS)" \
+		CPPFLAGS_FOR_BUILD="$$(dpkg-architecture -a$(DEB_BUILD_ARCH) -f -c dpkg-buildflags --get CPPFLAGS)" \
 
 override_dh_install:
 	cp NEWS debian/tmp/changelog
@@ -65,22 +65,20 @@ override_dh_installdocs:
 	dh_installdocs -Nlighttpd -Nlighttpd-doc --link-doc=lighttpd
 	dh_installdocs -plighttpd -plighttpd-doc
 
-override_dh_fixperms-arch:
-	dh_fixperms
-	chmod 0750 debian/lighttpd/var/log/lighttpd
-	chown www-data:www-data \
-			debian/lighttpd/var/cache/lighttpd \
-			debian/lighttpd/var/cache/lighttpd/compress \
-			debian/lighttpd/var/cache/lighttpd/uploads \
-			debian/lighttpd/var/log/lighttpd
-
 override_dh_installinit:
 	dh_installinit --error-handler=start_failed
 
-override_dh_gencontrol:
+execute_after_dh_installsystemd:
+	dh_installtmpfiles
+	dh_installsystemd -plighttpd --name=lighttpd-maint
+
+# The perl dependency for `lighttpd` is handled manually (as Recommends)
+override_dh_perl:
+	dh_perl -Nlighttpd
+
+execute_before_dh_debputy:
 	set -e; for p in `dh_listpackages`; do \
 		test -d debian/$$p/usr/lib/lighttpd || continue; \
 		m=`ls debian/$$p/usr/lib/lighttpd | sed 'y/_/-/;s/^mod-\(.*\)\.so$$/lighttpd-mod-\1,/;ta;d;:a /^'"$$p"',$$/d;' | xargs`; \
 		echo "lighttpd:ModuleProvides=$$m" >> debian/$$p.substvars; \
 	done
-	dh_gencontrol
